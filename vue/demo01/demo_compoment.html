@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app1'>
+        <button-component title="btn1" data_id="1"></button-component>
+        <button-component title="btn2" data_id="2"></button-component>
+        <button-component title="btn3" data_id="3"></button-component>
+    </div>
+    <hr>
+    <div id="app2">
+        <div>
+            <post-list v-on:get_detail="get_detail($event)" v-for="post in post_list" v-bind:post_id="post.id"
+                v-bind:post="post">
+            </post-list>
+        </div>
+        <hr>
+        <div>
+            <test></test>   
+        </div>
+    </div>
+</body>
+<script src="vue.js"></script>
+<script>
+    Vue.component('button-component', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        props: ['title', 'data_id'],  //可添加属性
+        template: '<div><button v-on:click="count++">you click me {{count}} times</button><p>{{title}} - {{data_id}}</p></div>',
+    });
+    var app = new Vue({
+        el: "#app1"
+    })
+</script>
+<script>
+    //全局组件
+    Vue.component('post-list', {
+        data: function () {
+            return {
+                postFontSize: 1
+            }
+        },
+        props: ['post', 'post_id'],
+        methods: {
+            enlarge_text: function (i) {
+                this.postFontSize += 0.1;
+            }
+        },
+        template: `
+            <div>
+                <h5>{{post_id}} ~~ {{post.title}}</h5>
+                <p :style="{fontSize:postFontSize + 'em'}">{{post.desc}}</p>  
+                <button v-on:click="enlarge_text()">Enlarge text</button>
+                <button v-on:click="$emit('get_detail',post_id)">get detial</button>  
+            </div> 
+        `,
+    });
+    var app2 = new Vue({
+        el: "#app2",
+        data: {
+            post_list: [
+                { id: 1, title: '北京地铁', desc: "北京的地铁很发达，也很拥挤。。。" },
+                { id: 2, title: '故宫博物馆', desc: "2020年博物馆很受伤。。。" },
+                { id: 3, title: '八达岭长城', desc: "不到长城非好汉。。。" },
+            ],
+        },
+        methods: {
+            get_detail: function (id) {
+                console.log('post id : ', id);
+            }
+        },
+        components : {
+            test : {
+                template : `<h3>我是局部组件</h3>`,
+            }
+        }
+    });
+</script>
+
+</html>
