@@ -106,6 +106,7 @@ export default {
       addRecord({id : this.id,text : this.text}).then(res=>{
         this.text = '';
         this.init();
+        this.$store.dispatch('getTodo');
       })
     },
     onLock(){

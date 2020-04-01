@@ -8,7 +8,6 @@ export const addTodo = params => { //demo
   return axios.post(`/todo/addTodo`, params).then(res => res.data);
 };
 export const getTodoById = params => {//根据id获取todo列表
-  console.log(params,'params');
   return axios.get(`/todo/listId`,{
     params : params
   })

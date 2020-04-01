@@ -54,14 +54,17 @@ export default {
   methods : {
     getList : function(id){
       this.todoId = id;
+      this.$store.state.menuOpen=false;
     },
     addTodoList() { // 点击新增按钮时候
     // 调用新增菜单的接口，在接口调用成功在请求数据
       addTodo({}).then(data => {
         getTodoList({}).then(res => {
+          this.$store.dispatch('getTodo');
+          // console.log(res);
           const TODOS = res.data.todos;
           this.todoId = TODOS[TODOS.length - 1].id;
-          this.items = TODOS;
+          // this.items = TODOS;
         });
       });
     }
