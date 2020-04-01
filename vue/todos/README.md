@@ -1,5 +1,6 @@
 # todos
-# 教学地址 : https://github.com/liangxiaojuan/vue-todos
+# 教程地址 : https://github.com/liangxiaojuan/vue-todos
+# 我的demo : http://xjngo.cn/vue/todos
 > A Vue.js project
 
 ## Build Setup
