@@ -2,7 +2,7 @@
   <!--菜单容器-->
   <div class="list-todos">
     <!--单个菜单容器-->
-    <a v-on:click="getList(item.id)" class="list-todo activeListClass list" v-for="(item,index) in items" v-bind:key="index" :class="{'active' : item.id==todoId}">
+    <a v-on:click="getList(item.id)" class="list-todo activeListClass list" v-for="(item,index) in todoList" :key="index" :class="{'active' : item.id==todoId}">
       <!--锁的图标-->
       <span class="icon-lock" v-if="item.locked"></span>
       <!--数字-->
@@ -21,34 +21,35 @@
 <script>
 import {getTodoList , addTodo } from '@/api/api.js'
 export default {
-  // data() {
-  //   //data函数
-  //   return {
-      // items: [
-      //   { title: "星期一", count: 1, locked: true }, //菜单的模拟数据
-      //   { title: "星期二", count: 2, locked: true },
-      //   {
-      //     title: "星期三",
-      //     count: 3,
-      //     locked: false
-      //   }
-      // ]
-  //     items : [],
-  //     todoId :'',
-  //   };
-  // },
   data() {
     return {
       items: [], // 菜单数据
-      todoId: '' // 默认选中id
+      todoId: '', // 默认选中id
+      todoNum : 0 //用于判断是否有todo被删除
     };
-  },
+	},
+	computed : {
+		todoList(){
+      const number = this.$store.getters.getTodoList.length;
+      if (this.$store.getters.getTodoList.length < this.todoNum) {
+         this.goList(this.$store.getters.getTodoList[0].id);
+      }
+      this.todoNum = number;
+			return this.$store.getters.getTodoList;
+		}
+	},
   created : function(){
-    getTodoList({}).then(res=>{
-      const r = res.data.todos;
-      this.items = r;
-      this.todoId = r[1].id;
-    });
+    // getTodoList({}).then(res=>{
+    //   const r = res.data.todos;
+    //   this.items = r;
+    //   this.todoId = r[1].id;
+    // });
+    this.$store.dispatch('getTodo').then(()=>{
+			// this.getList(this.$store.getters.getTodoList[0].id);
+      this.$nextTick(()=>{
+				this.getList(this.$store.getters.getTodoList[0].id);
+			})
+    })
   },
   methods : {
     getList : function(id){
@@ -72,7 +73,8 @@ export default {
     // },
     'todoId'(id) {
       this.$router.push({ name: 'todo', params: { id: id } });
-    }
+    },
+
 
   }
 };

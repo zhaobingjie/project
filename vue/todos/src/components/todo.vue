@@ -3,7 +3,7 @@
     <!--最外层容器-->
     <nav>
       <!--容器上半部分-->
-      <div class="nav-group">
+      <div class="nav-group"  @click="$store.dispatch('updateMenu')">
         <!--移动端的菜单图标-->
         <a class="nav-item">
           <span class="icon-list-unordered"></span>
@@ -18,12 +18,12 @@
       <div class="nav-group right">
         <!-- 右边的删除，锁定图标容器-->
         <div class="options-web">
-          <a class="nav-item">
+          <a class="nav-item" @click="onLock">
             <!-- 锁定图标-->
             <span class="icon-lock" v-if="todo.locked"></span>
             <span class="icon-unlock" v-else></span>
           </a>
-          <a class="nav-item">
+          <a class="nav-item" @click="todo.isDelete = true;updateTodo()">
             <!-- 删除图标-->
             <span class="icon-trash"></span>
           </a>
@@ -44,14 +44,14 @@
     </nav>
     <div class="content-scrollable list-items">
       <!--容器下半部分-->
-			<item v-for="(item,index) in items" v-bind:key="index" v-bind:item="item"></item>
+			<item v-for="(item,index) in items" v-bind:key="index" :index="index" v-bind:item="item" :allLocked='todo.locked' :init='init' :id='id'></item>
     </div>
   </div>
 </template>
 
 <script>
 import item from '@/components/item'
-import {getTodoById,addRecord} from '@/api/api';
+import {getTodoById,addRecord,editTodo} from '@/api/api';
 export default {
   data() {
     return {
@@ -71,7 +71,8 @@ export default {
       todo : {
         title : '',
         count : '',
-        locked : false
+        locked : false,
+        isDelete : false,
       },
       items : [],
       text: "" //新增代办单项绑定的值
@@ -102,14 +103,21 @@ export default {
       })
     },
 		onAdd : function(){
-      console.log(this.text);
       addRecord({id : this.id,text : this.text}).then(res=>{
-        console.log(res);
+        this.text = '';
+        this.init();
       })
-			this.items.push({checked: false,text : this.text,isDelete: false});
-      this.text = '';
-      
-		}
+    },
+    onLock(){
+      this.todo.locked = !this.todo.locked;
+      this.updateTodo();
+    },
+    updateTodo(){
+      let _this = this;
+      editTodo({todo : _this.todo}).then(()=>{
+        _this.$store.dispatch('getTodo');
+      });
+    }
 	}
 };
 </script>
