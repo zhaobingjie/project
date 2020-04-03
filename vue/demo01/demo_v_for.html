@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <h3>array list : {{list}}</h3>
+        <ul>
+            <li v-for="item in list">num : {{item}}</li>
+        </ul>
+        编译方法 : <button @click="push">push one number</button>
+        <button @click="unshift">unshift one number</button>
+        <button @click="pop">pop one number</button>
+        <button @click="shift">shift one number</button>
+        <button @click="sort">sort</button>
+        <br>
+        <br>
+        替换数组 : 
+        <button @click="concat">concat ['A','B','C']</button>
+        <br><br>
+        注意事项 : 
+        <br>Vue 不能检测这种形式数组的变动 : <button @click="updateA">list[2] = 'newValue'</button>
+        <br>解决方法 : <button @click="updateB">this.$set(list , 2 ,'newValue')</button>
+        <br><br>
+        显示过滤后的数组且不改变原数组解决方案: <b>使用计算属性或者方法</b>
+        <p>只显示奇数</p>
+        <ul>
+            <li v-for="item in listodd">num : {{item}}</li>
+        </ul>
+    </div>  
+</body>
+<script>
+    var vm = new Vue({
+        el : "#app",
+        data : {
+            list : [6,1,2,3,4,5],
+            number : 10,
+            listB : ['A','B','C'],
+        },
+        computed :{
+            listodd : function (){
+                return this.list.filter(i=>i%2==1);
+            }
+        },
+        methods : {
+            push : function(){
+                this.list.push(this.number);
+                this.number +=1;
+            },
+            unshift :function(){
+                this.list.unshift(this.number);
+                this.number +=1;
+            },
+            pop : function(){
+                this.list.shift();
+            },
+            shift :function(){
+                this.list.pop();
+            },
+            sort : function(){
+                this.list.sort();
+            },
+            concat : function(){
+                this.list = this.list.concat(this.listB);
+            },
+            updateA : function(){
+                this.list[2] = 'newValue';
+                console.log('this.list : ',this.list);
+            },
+            updateB : function(){
+                this.$set(this.list,2,'new value');
+            },
+
+        }
+    });
+</script>
+</html>

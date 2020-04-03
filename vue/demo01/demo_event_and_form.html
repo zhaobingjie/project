@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件、表单</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <div style="height: 100px;border: 1px solid black;" @click="dosomethingC">
+            <button @click="dosomethingA">click 冒泡</button>
+            <button @click.stop="dosomethingA">click.stop 阻止冒泡</button>
+            <button @click.ctrl="dosomethingB">ctrl + click</button>
+        </div>
+        <br><br>
+        <form action="">
+            <input type="text" v-model="msg">{{msg}}
+            <br><br>
+            <input type="radio" name="sex" v-model="sex" value="girl"> girl
+            <input type="radio" name="sex" v-model="sex" value="boy"> boy  
+            <br>your checked : {{sex}}
+            <br><br>
+            <input type="checkbox" v-model="box" value="A"> A 
+            <input type="checkbox" v-model="box" value="B"> B 
+            <input type="checkbox" v-model="box" value="C"> C 
+            <br> your checked : {{box}}
+            <br><br>
+        </form>
+    </div>  
+</body>
+<script>
+    var vm = new Vue({
+        el : "#app",
+        data : {
+            msg : '',
+            sex : '',
+            box : ['B'],
+            score : 0,
+        },
+        methods : {
+            dosomethingA : function(){
+                alert('click ok')
+            },
+            dosomethingB : function(){
+                alert('ctrl click ok')
+            },
+            dosomethingC : function(){
+                alert('div click ok')
+            }
+
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,36 @@
+Arguments: 
+  D:\Program Files\nodejs\node.exe C:\Users\zhaobingjie\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  D:\my_project\vue\demo03\node_modules\.bin;D:\my_project\vue\node_modules\.bin;D:\my_project\node_modules\.bin;D:\node_modules\.bin;D:\Program Files\nodejs;C:\Users\zhaobingjie\bin;D:\Program Files\Git\mingw64\bin;D:\Program Files\Git\usr\local\bin;D:\Program Files\Git\usr\bin;D:\Program Files\Git\usr\bin;D:\Program Files\Git\mingw64\bin;D:\Program Files\Git\usr\bin;C:\Users\zhaobingjie\bin;D:\Program Files (x86)\xshell;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\TortoiseSVN\bin;D:\wamp64\bin\php\php5.6.25;D:\Program Files\Git\cmd;D:\Program Files\nodejs;D:\Program Files\PuTTY;D:\wamp64\bin\mysql\mysql5.7.14\bin\bin;D:\composer;C:\Program Files (x86)\Microsoft SQL Server\80\Tools\Binn;C:\Users\zhaobingjie\AppData\Roaming\npm\cnpm;C:\Program Files\MySQL\MySQL Shell 8.0\bin;D:\Program Files\Microsoft VS Code\bin;C:\Users\zhaobingjie\AppData\Roaming\npm;D:\wamp64\bin\mysql\mysql5.7.14\bin;D:\Program Files\Git\usr\bin\vendor_perl;D:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.22.0
+
+Node version: 
+  10.15.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPIPE: broken pipe, write
+      at Socket._write (internal/net.js:58:25)
+      at doWrite (_stream_writable.js:410:12)
+      at writeOrBuffer (_stream_writable.js:394:5)
+      at Socket.Writable.write (_stream_writable.js:294:11)
+      at ConsoleReporter.warn (C:\Users\zhaobingjie\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:96774:17)
+      at _loop3 (C:\Users\zhaobingjie\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:49480:27)
+      at PackageLinker.resolvePeerModules (C:\Users\zhaobingjie\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:49499:19)
+      at PackageLinker.<anonymous> (C:\Users\zhaobingjie\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:49595:12)
+      at Generator.next (<anonymous>)
+      at step (C:\Users\zhaobingjie\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

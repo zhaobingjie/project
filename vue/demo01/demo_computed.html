@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>计算属性 computed </title>
+	<script src="../vue.js"></script>
+</head>
+
+<body>
+	<div id='app'>
+		<h1>hi :  {{hi}}</h1>
+		<h2>reverseHi : {{reverseHi}}</h2>
+		<button @click="reverseHi='jack'">click to set  reverseHi = 'jack'  </button>
+		<div class="log">
+			<p>------------- 执行记录 ----------</p>
+			<p v-for="(item) in logs">{{item}}</p>
+		</div>
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el : '#app',
+		data : {
+			hi : 'hi vue',
+			logs : [],
+		},
+		computed : {
+			reverseHi : {
+				get: function(){
+					this._log('run reverseHi get');
+					return this.hi.split('').reverse().join('');
+				},
+				set : function(v){
+					this._log('set reverseHi =  '+ v);
+					this._log('run computed set');
+					this.hi = v;
+				}
+			}
+		},
+		methods : {
+			_log : function(con){
+				this.logs.push(con);
+			}
+		}
+	});
+
+	
+</script>
+
+</html>
