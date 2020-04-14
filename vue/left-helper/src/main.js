@@ -3,6 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import WeVue from 'we-vue'
+import 'we-vue/lib/style.css'
+
+Vue.use(WeVue);
 
 Vue.config.productionTip = false
 
