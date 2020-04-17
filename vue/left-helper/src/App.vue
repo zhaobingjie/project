@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <section>header</section> -->
-    <section>
+    <section class="content">
       <router-view/>
     </section>
     <section>
@@ -20,8 +20,8 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  text-align: center;
+<style scoped>
+.content{
+  margin-bottom: 55px;
 }
 </style>

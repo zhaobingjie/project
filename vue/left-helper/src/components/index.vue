@@ -21,6 +21,7 @@ export default {
 <style scoped>
 .title{
     margin-top: 20%;
+    text-align: center;
 }
 .list{
     margin: 20px 10px;

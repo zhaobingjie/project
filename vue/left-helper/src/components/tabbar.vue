@@ -1,5 +1,5 @@
 <template>
-    <wv-tabbar>
+    <wv-tabbar fixed>
       <wv-tabbar-item to="/" :is-on="'/'==$route.path">
         <span slot="icon" style="display: inline-block; position: relative;">
           <!-- <img class="weui-tabbar__icon" src="icon.png" slot="icon" /> -->
@@ -35,4 +35,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.tabbar{position: fixed;}
 </style>

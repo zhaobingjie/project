@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import WeVue from 'we-vue'
 import 'we-vue/lib/style.css'
+import store from './store/store';
 
 Vue.use(WeVue);
 
@@ -14,6 +15,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
