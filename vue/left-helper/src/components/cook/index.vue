@@ -17,8 +17,8 @@
     <div class="my_collect">
       <h2>我的收藏</h2>
       <ul>
-        <ol v-for="item in collect" :id="item.id">
-          <router-link :to="'/cookbook/detail/'+item.id">{{item.title}}</router-link>
+        <ol v-for="item in collect" :id="item.menu_id">
+          <router-link :to="'/cookbook/detail/'+item.menu_id">{{item.title}}</router-link>
         </ol>
       </ul>
     </div>
@@ -59,6 +59,7 @@ export default {
   created() {
     let _this = this;
     getCollect({}, res => {
+      console.log(res.data);
       _this.collect = res.data;
     });
     this.historyTags = JSON.parse(localStorage.getItem(this.historyTagsKey));

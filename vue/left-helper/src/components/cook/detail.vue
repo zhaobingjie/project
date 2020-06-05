@@ -34,24 +34,12 @@ export default {
   methods: {
     getDetail() {
       let _this = this;
-      let data = null;
-      for (let index = 0; index < this.$store.state.cook.list.length; index++) {
-        if (
-          this.$store.state.cook.list[index].id ==
-          this.$store.state.cook.selected_id
-        ) {
-          this.detail = this.$store.state.cook.list[index];
-          break;
-        }
-      }
-      if (!data) {
-        getCookDetail({ id: this.$store.state.cook.selected_id }, function(
-          res
-        ) {
-					if(!res.data[0]){alert("该内容已不存在"); return} 
-          _this.detail = res.data[0];
-        });
-      }
+      getCookDetail({ id: this.$store.state.cook.selected_id }, function(res) {
+        if(!res.data){alert("该内容已不存在"); return} 
+        console.log(res);
+        _this.detail = res.data.detail;
+        _this.is_collect = res.data.collect;
+      });
     },
     doCollect() {
       let id = this.detail.id;

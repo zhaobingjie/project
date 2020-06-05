@@ -5,24 +5,31 @@ import axios from 'axios'
 //         key : params
 //     })
 // }
+const APP_PATH = 'http://helper.com/';
+
+
+var HTTP = axios.create({
+    baseURL:APP_PATH, //这是基础url
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    transformRequest: [function (data) {
+      // Do whatever you want to transform the data
+      let ret = ''
+      for (let it in data) {
+        ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+      }
+      return ret
+    }]
+})
 //搜索菜单
 export const searchCookBykeyword = function(params)  {
-    //http://127.0.0.1/logomaker.com.cn/new/www/trunk/api.php?op=zbj&act=get_menu_by_keyword&keyword=%E8%A5%BF%E7%BA%A2%E6%9F%BF&page=1
-    return axios.get('http://127.0.0.1/logomaker.com.cn/new/www/trunk/api.php?op=zbj&act=get_menu_by_keyword',{
-        params : {keyword : params.search,page:params.page}
+    return axios.get(APP_PATH+'cook/menu/'+params.search,{
+        params : {page:params.page}
     })
 }
-//收藏菜单
-export const setCookCollect = function(params)  {
-    return axios.get('http://127.0.0.1/logomaker.com.cn/new/www/trunk/api.php?op=zbj&act=collect_cook',{
-        params : {id : params.id,title:params.title,is_collect : params.is_collect}
-    })
-}
+
 //菜单详情
 export const getCookDetail = function(params,func)  {
-    return axios.get('http://127.0.0.1/logomaker.com.cn/new/www/trunk/api.php?op=zbj&act=cook_detail',{
-        params : {id : params.id}
-    }).then(res=>{
+    return axios.get(APP_PATH+'cook/detail/'+params.id).then(res=>{
         if(res.status==200){
             func(res.data);
         }else{
@@ -30,8 +37,17 @@ export const getCookDetail = function(params,func)  {
         }
     })
 }
+
+//收藏菜单
+export const setCookCollect = function(params)  {
+    return HTTP.post('cook/collect',{
+        menu_id : params.id,title:params.title,is_collect : params.is_collect
+    })
+}
+
+//获取收藏菜单
 export const getCollect = function(params,func){
-    return axios.get('http://127.0.0.1/logomaker.com.cn/new/www/trunk/api.php?op=zbj&act=get_collect',{
+    return axios.get(APP_PATH+'cook/collect',{
         params : params
     }).then(res=>{
         if(res.status==200){
