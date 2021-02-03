@@ -62,7 +62,7 @@ export default {
       console.log(res.data);
       _this.collect = res.data;
     });
-    this.historyTags = JSON.parse(localStorage.getItem(this.historyTagsKey));
+    this.historyTags = JSON.parse(localStorage.getItem(this.historyTagsKey)) || [];
   },
   computed: {
     filterResult() {
